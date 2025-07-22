@@ -15,13 +15,13 @@ This project aims to:
 
 ## Current Status
 
-This project is in its early stages. The solutions for **Problem 1** are available, while the others are placeholders awaiting the official releases. The initial website structure is in place, but we welcome all contributions to enhance its functionality and design.
+This project is in its early stages. The solutions for **Problem 1** are available, while the others are still a work in progress. The initial website structure is in place, but we welcome all contributions to enhance its functionality and design.
 
 ## How to Contribute
 
 This project thrives on community involvement. We welcome all forms of contribution to help make this a world-class resource. Whether you are a mathematician, a software developer, an AI researcher, or simply an enthusiast, there are many ways to help:
 
-*   **Validate and Annotate Solutions:** Review the AI-generated proofs for correctness, add explanatory comments, or suggest alternative mathematical approaches.
+*   **Validate and Annotate Solutions:** Review the solutions. Since openai doesn't use Latex and Google didn't give the source code it's very easy to make mistakes, especially since I am not a Latex expert.
 *   **Improve the Website:** Enhance the web interface (`index.html`). This could involve improving the design, adding features for better code and LaTeX rendering, or making it more mobile-friendly.
 *   **Expand the Dataset:** Add solutions from other notable AI models as they become available.
 *   **Report Issues:** If you find any errors, from mathematical typos to web-based bugs, please open an issue in the GitHub repository.
@@ -31,3 +31,9 @@ All contributions will be credited. Please feel free to open a pull request or a
 ## A Note on the Project's Origins
 
 This project was initiated and built with the significant use of AI assistants, including the generation of the initial code, structure, and this README. It stands as a testament to the power of human-AI collaboration in modern software and knowledge-base creation. The `prompts.txt` file includes some of the prompts used in this process.
+
+Sources:
+* [Deepmind Blog](https://deepmind.google/discover/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/)
+* [Deepmind Solutions PDF](https://storage.googleapis.com/deepmind-media/gemini/IMO_2025.pdf)
+* [OpenAI Solutions txt repo](https://github.com/aw31/openai-imo-2025-proofs)
+* OpenAI Tweets (todo add later)
