@@ -1,0 +1,220 @@
+### PROBLEM 3 SUBMISSION ###
+
+\[
+P_f(a,b):\qquad  f(a)\mid b^a - f(b)^{\,f(a)}, \ \forall a,b\ge1.
+\]
+Need universal linear majorant constant over all such functions.
+
+--------------------------------------------------------------------------
+
+### 1. Basics
+
+Disk: bonza = satisfies P_f.
+
+First easy observation, same a=b:
+P_f(n,n): f(n) | n^n.                                  (obs O)
+
+So: prime divisors of value f(n) are subset of prime divisors of n.
+
+Specializing to prime p: P_f(p,p): f(p) | p^p. So f(p) is either 1, or p^t (t>=1).
+
+So for prime arguments, values are p-powers (or 1).
+
+So whole problem: universal bound over all bonza f: N->N.
+
+Need sharp bound.
+
+--------------------------------------------------------------------------
+
+### 2. Congruence mod prime when prime value >1.
+
+Key lemma.
+
+Lem1. Let p prime with f(p) > 1 (equivalently p | f(p), because for prime p, obs O gives f(p)=p^t or 1). Then: for every integer x,  
+f(x) ≡ x (mod p).
+
+Proof: f(p)>1 -> from obs O at p, f(p)=p^t, t>=1.
+
+Now P_f(p,x): modulus f(p)=p^t divides x^p - f(x)^{p^t}. In particular p divides that.
+Need mod p of RHS.
+
+Classic: in F_p: Frobenius: u^p ≡ u mod p for all u (Fermat). Iterate t times: u^{p^k}≡u mod p for all k>=1. So f(x)^{p^t}≡ f(x) mod p. Also x^p≡x mod p.
+
+So x^p - f(x)^{p^t} ≡ x - f(x) mod p. LHS divisible by p, so p|x-f(x). Exactly. So congruence for all x. Lemma1 done. Very strong.
+
+So: any prime p with f(p)>1 enforces global congruence mod p: f(x)≡x (all x).
+
+So far.
+
+Need also infinite primes outside class 1 mod p when p>2.
+
+Lem2 (Euclid type). For prime p>2: infinitely many primes q with q\not\equiv 1 mod p.
+
+Standard Euclid variation:
+Suppose finitely many primes not 1 mod p (excluding p). Let S finite set.
+N := p* Π_{q in S} q - 1. N>1.
+Any prime r|N: r≠p (N mod p = -1), r not in S (mod any s in S, N≡-1 so not divisible).
+So r prime, different from p, outside S. Assumption: any prime different from p and outside S must be ≡1 mod p. So all prime divisors of N are ≡1 mod p. Product of residues mod p -> N≡1 mod p. But by definition N≡ -1 mod p. Contrad. So S can't be finite. So infinitely many primes not 1 mod p. Exactly. For p=2 false (all odd primes are 1 mod2), fine. Only need p>2. Done.
+
+So for p>2, infinite primes outside residue1 mod p.
+
+--------------------------------------------------------------------------
+
+### 3. Consequence: if some odd prime has f>1, entire f is identity.
+
+Now main structural lemma.
+
+Suppose exists odd prime p>2 with f(p)>1.
+
+So p|f(p). Apply Lemma1 for this p: (C_p): for all x, f(x)≡ x mod p.
+
+Now S_p = {primes q≠p, q \not\equiv 1 mod p}: infinite by Lemma2.
+
+Fix any q in S_p.
+
+What are possible f(q)? Prime input q: obs O with a=q,q: f(q)|q^q. P(q,q) -> all prime factors of f(q) are q. So f(q) is either 1 or exact power q^s (s>=1).
+
+But congruence (C_p) at x=q: f(q)≡ q mod p. If f(q)=1, would need 1≡q mod p, impossible because q\not\equiv1 mod p (q in S_p). So f(q)≠1. So f(q)=q^s, s>=1, hence >1 and divisible by q.
+
+So: for every prime q in S_p (infinite set), f(q)>1 and q|f(q). Good.
+
+Now same lemma1 but with prime q (since f(q)>1 => q|f(q)): for each such q, for all x, f(x)≡ x mod q. So infinite set of distinct primes Q=S_p: for each q in Q, congruence f(x)≡ x (mod q) for all x.
+
+Now fix arbitrary integer x. For every q in infinite Q, q divides f(x)-x. So fixed integer f(x)-x has infinitely many prime divisors -> must be 0. So f(x)=x for all x. So f is identity function.
+
+So statement:
+If any odd prime p has f(p)>1, f is IDENTICALLY id. (Identity is bonza, fine.)
+
+So: any bonza either identity, or: for all odd primes p, f(p)=1. That's exact dichotomy.
+
+So to bound worst ratio, only need handle non-identity case: all odd primes mapped to 1.
+
+So from now: non-identity bonza f. So:
+(*) For every odd prime p: f(p)=1.
+
+--------------------------------------------------------------------------
+
+4. Structure in non-identity case.
+
+First, show no odd prime can divide any value.
+
+Suppose n with odd prime r | f(n). Obs O: f(n)|n^n -> r|n. Now P_f(n,r): modulus f(n) divisible by r.
+So r | r^n - f(r)^{f(n)}. But f(r)=1 (r odd). So need r| r^n - 1. r^n divisible by r, difference -1 mod r, impossible. So cannot. So indeed:
+
+(**) In non-identity case: for all n, f(n) has no odd prime factors. So f(n) is power of 2 always.
+
+Also for odd n: f(n) | n^n (odd), but f(n) is power of 2 -> only 1. So for non-identity case: all odd arguments -> value 1.
+
+So picture: odd inputs ->1; even inputs -> some power of 2 (including 1).
+
+So rest is bound for even n.
+
+So objective now: For non-identity bonza, show f(n) <= 4 n for all n. (Identity case already OK.)
+
+So fix even n.
+
+Write α:= v_2(n) (>=1). Let M:=f(n). In this case M is power of 2; write M=2^e (e>=0).
+
+Need show e <= α+2. Then M<=2^{α+2}<=4*2^α*odd part<=4 n. Exactly.
+
+So task: bound e in terms of α.
+
+If e<=2, trivial because α>=1 -> e<=α+2. So only interesting e>=3.
+
+So assume e>=3.
+
+Now use bonza property at a=n, but with odd b.
+
+Fix odd integer b.
+Since we are in non-identity case, f(b)=1 for odd b.
+Original P_f(n,b): modulus M=f(n). So
+M | b^n - f(b)^{M} = b^n - 1.    (because f(b)=1)
+So for every odd b: b^n ≡ 1 (mod M=2^e). Important.
+
+So: in modulus 2^e (e>=3 now), all odd residues' n-th power =1.
+
+Now need group theory mod 2^e.
+
+First, easy: description of 2^e-th power residues mod 2^e:
+For any integer y mod 2^e:
+- if y even, y^{M} divisible by 2^{M}>>2^e, so y^M≡0 mod M.
+- if y odd, gcd(y,M)=1. Euler: phi(2^e)=2^{e-1}; y^{2^{e-1}}≡1 mod 2^e. M=2^e=2*phi(2^e). So y^M = (y^{phi})^2≡1 mod 2^e.
+So any M-th power modulo M is either 0 (y even) or 1 (y odd). So image of M-th power map = {0,1}.
+
+Now in our congruence above: left side b^n for odd b is odd mod 2^e, can't be 0, so must match 1. So indeed: for any odd b, b^n≡1 mod 2^e. That's exact statement.
+
+So in group U = (Z/2^eZ)^* (all odd residue classes), every element u satisfies u^n=1.
+
+Need use element of large order to constrain n's 2-adic.
+
+Classic lemma about mod 2^e units:
+
+Lemma3: For e>=3, ord_{2^e}(5) = 2^{e-2}.
+(standard; prove once via 2-adic valuations).
+
+Quick proof of Lem3:
+Compute v_2(5^{2^k}-1) exactly.
+Claim: for all k>=0, v2(5^{2^k}-1) = k+2. Induction.
+k=0: 5-1=4, v2=2 ok.
+Step: 5^{2^{k+1}}-1 = (5^{2^k}-1)(5^{2^k}+1). v2 product sum.
+First factor v2=k+2 by IH.
+Second factor: 5^{2^k} odd; 5≡1 mod4 => 5^{2^k}≡1 mod4, so +1≡2 mod4 -> v2=1. So total (k+2)+1=k+3=(k+1)+2. Done.
+So formula true.
+Now e>=3.
+k=e-2: v2(5^{2^{e-2}}-1)=e -> 5^{2^{e-2}}≡1 mod2^e.
+k=e-3 (nonneg): v2(...)=e-1 < e -> 5^{2^{e-3}} not 1 mod2^e.
+Now order d of 5 mod2^e is power of 2 dividing phi(2^e)=2^{e-1}.
+Also 5^{2^{e-2}}≡1 mod2^e => d|2^{e-2}.
+If d < 2^{e-2}, d divides 2^{e-3}, would imply 5^{2^{e-3}}≡1 mod2^e, false. So only possibility d=2^{e-2}. Exactly. So ord=2^{e-2}. Lemma3 done.
+
+Now back: in mod 2^e, we know for all odd u, u^n=1. In particular u=5: 5^n≡1 mod2^e.
+Order of 5 mod2^e is 2^{e-2} by Lem3. So 2^{e-2} divides n. So v_2(n) = α >= e-2. So e <= α+2. Exactly the bound we wanted. Contradiction to assumed e>=α+3. So impossible. So always e<=α+2.
+
+So for any even n: M=2^e<=2^{α+2}. n=2^α * (odd m), so n>=2^α. So M<=2^{α+2}<=4*2^α<=4n. So f(n)=M<=4n.
+
+Odd n in non-identity case: f(n)=1<=4n. Great.
+
+So for non-identity bonza f: for all n, f(n)<=4n.
+
+Identity f: f(n)=n<=4n too. So **any** bonza f satisfies f(n) <=4 n for all n.
+
+So universal constant c can be taken 4. So c<=4.
+
+Need sharpness: show can't be less.
+
+Example function realizing ratio 4:
+
+Define g: N->N:
+g(n)=1 if n odd,
+g(4)=16,
+g(n)=2 if n even but n≠4.
+
+So values {1,2,16}.
+
+Check g is bonza:
+
+- a odd: g(a)=1, divisibility always.
+
+- a even, a≠4: then g(a)=2 (modulus 2). Need 2 | b^a - g(b)^2 for all b.
+Parity: for any integer t, t^a mod2 = t mod2 (same parity). And g(b) is odd iff b odd (g(b)=1), even iff b even (g(b)=2 or16). So g(b)^2 mod2 equals g(b) mod2 = b mod2. So b^a and g(b)^2 have same parity -> difference even -> divisible by2. good.
+
+- special a=4: modulus 16.
+Need 16 | b^4 - g(b)^{16} for all b.
+If b odd: g(b)=1. Classic: any odd x, x^2≡1 mod8 -> x^4≡1 mod16. so b^4 -1 divisible by16.
+If b even, b=4: g(4)=16; both 4^4 and 16^16 divisible by16, diff divisible.
+If b even, b≠4: g(b)=2. Any even b: b=2u -> b^4=16u^4 divisible by16. and g(b)^{16}=2^{16} divisible by16. diff divisible. So hold.
+So all cases: divisibility true. So g is bonza indeed.
+
+Now value at n=4: g(4)=16, ratio g(4)/4=4. So any universal c must satisfy c>=4.
+
+So lower bound 4, upper bound 4. So minimal constant is exactly 4.
+
+So answer: **c = 4**.
+
+That's full.
+
+\[
+\boxed{c_{\min}=4.}
+\]
+
+Done.

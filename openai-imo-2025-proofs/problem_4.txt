@@ -1,0 +1,258 @@
+### PROBLEM 4 SUBMISSION ###
+
+\[
+f(N):=\text{ sum of three largest proper divisors of } N,
+\]
+domain: integers N with d(N) (number of divisors) at least 4 (= at least 3 proper divisors).
+Given infinite orbit: a_1,a_2,... , each term in domain, and a_{n+1}=f(a_n), n>=1.
+Need all possible a_1.
+
+--------------------------------------------------------------------------
+
+### 1. Encoding f via small divisors.
+
+For N with d(N)>=4:
+List all divisors of N > 1 (N included), increasing. Let first three be d1<d2<d3.
+(Always exist: besides 1 and N, at least two more divisors -> at least 3 divisors >1.)
+Basic involution d -> N/d on divisor set reverses order. Exact:
+Proper divisors of N are all divisors except N. Largest proper divisors correspond to smallest divisors >1: precisely N/d1, N/d2, N/d3. (If only 3 proper besides N, d3 = N, N/d3=1; fine.)
+So exact formula, always:
+f(N) = N/d1 + N/d2 + N/d3, where d1<d2<d3 are three smallest divisors of N > 1. Fixed.
+
+So everything is: k1,k2,k3=three smallest divisors >1 of current term.
+
+So need understand possible triples {d1,d2,d3} along orbit.
+
+I'll use that throughout.
+
+Also mod3 little lemma: nonzero residues mod3 are {1,2}, inverse = itself. For x,y,z in {1,2}: x+y+z≡0 mod3 iff x=y=z. Only possibilities 1+1+1, 2+2+2. Exact.
+
+So: for N not multiple of 3, d_i nonzero mod3. And sum N/d_i divisible by3 iff d1,d2,d3 all same mod3. That's used repeatedly.
+
+Now orbit analysis.
+
+--------------------------------------------------------------------------
+
+### 2. Eliminate odd terms.
+
+Lemma 1: In any infinite valid sequence: no odd term.
+
+Proof:
+Take odd N with d(N)>=4. All divisors odd. Three smallest >1 are odd distinct.
+Distinct odd >=3: so d1>=3, d2>=5, d3>=7.
+So f(N) = N/d1+N/d2+N/d3 <= N(1/3+1/5+1/7)=71/105 N < N. strict.
+Each summand N/di odd. So f(N) odd and <N.
+So if some term is odd, next is odd and smaller. Induct: all following odd, strictly decreasing positive odds – impossible infinite. So cannot.
+So in valid infinite orbit: every a_n is even. Exact. Good.
+
+So from now: all terms even.
+
+Need show also all terms multiple of 3.
+
+--------------------------------------------------------------------------
+
+### 3. Behavior of even numbers not divisible by 3.
+
+Need precise lemma.
+
+Let N even, d(N)>=4, 3 ∤ N. d1=2<d2<d3 three smallest >1, f(N)=N/d1+N/d2+N/d3.
+
+Lemma A (key):
+
+(i) f(N) < N.
+(ii) If f(N) is even, then 3 does NOT divide f(N).
+
+So even non-multiple-of-3 can't map to multiple of 3.
+
+Proof of (i): N even, no 3.
+d1=2 fixed. 3 not divisor -> d2>=4. distinct -> d3>=5. So
+f(N) <= N/2 + N/4 + N/5 = 19/20 N < N. Good.
+
+So strict decrease always when N even non-3.
+
+Now mod3 part (ii). Two 2-adic cases.
+
+Case I: 4|N, 3∤N.
+Need show f(N) mod3 nonzero.
+N divisible by4, no 3: smallest >1 besides1? d1=2, d2 must be 4 (any odd divisor besides1 at least5, 4 is smaller). So d1=2, d2=4.
+Also N not divisible by3 => d3 not divisible by3.
+Compute mod3 of f(N): N nonzero mod3.
+Each summand N/di nonzero mod3 (divides N, N has no 3). Now mod3 inverses: inv(1)=1, inv(2)=2.
+f(N) divisible by3 <-> d1+d2+d3≡0 mod3 (since N factor invertible, inv(di)=di).
+Now d1=2 d2=4≡1 mod3, sum d1+d2≡0 mod3. So f(N) mod3 ≡ d3 mod3. d3 nonzero mod3. So nonzero. So 3 ∤ f(N). Exactly.
+
+So case I done.
+
+Case II: N even but not div by4 -> exact v2(N)=1. So N=2k, k odd, 3 ∤ k.
+
+Now structure of d2,d3.
+
+First: d2 is odd.
+Reason: smallest odd divisor >1 of N exists (k>1 because N has >=3 proper). call p. Any even divisor besides2: because only one 2, form 2u with u|k odd. Minimal such u>=p -> 2u>p. So among divisors besides {1,2}, smallest is p (odd). That's d2. So d2 odd.
+
+Now assume f(N) is even (in orbit will be). f(N)=N/2 + N/d2 + N/d3. N/2=k odd.
+Need parity of N/d for N=2k (k odd):
+If d odd: N/d=2*(k/d) even.
+If d even (=2u with odd u|k): N/d=k/u odd.
+So N/d is odd exactly when d is even.
+
+f(N) = odd + N/d2 + N/d3. To be even, among N/d2,N/d3 exactly one odd -> exactly one of d2,d3 even.
+But d2 already odd. So d3 must be even. Good.
+
+So: under f even, d3 even.
+
+Now pinpoint d3. Let E=2 d2.
+E divides N: N=2k, d2|k -> yes.
+Any even divisor of N besides 2: form 2u with u|k odd, u>=d2 (d2 smallest odd). So any even divisor besides2 is at least 2d2=E. So E is minimal even divisor besides2.
+Now d3 is an even divisor besides2 (we just got). So d3 >= E.
+
+What if d3 > E? E is divisor of N, distinct from d1=2,d2, and E < d3. Then among divisors besides1: 2, d2, E are three <d3; so d3 wouldn't be third smallest. Contrad. So can't have d3>E. So d3=E=2d2. Exact.
+
+So for N=2k non-3, if f(N) even, necessarily d2 odd, d3=2 d2.
+
+Now mod3 of f(N).
+Again N nonzero mod3, d_i nonzero mod3.
+Same criterion: f(N) divisible by3 <-> d1+d2+d3≡0 mod3.
+d1=2. d3=2d2. So sum=2+ d2 + 2 d2=2 + 3d2 ≡2 mod3. Never 0. So 3 ∤ f(N). Exactly. Contrad if assumed. So (ii) done. So lemma A proved. Good.
+
+So: even non-multiple-of-3: next term is strictly smaller (part (i)), and if next term even, it's still non-multiple of 3 (part (ii)). Exactly what we need.
+
+Now main Lemma 2: In any infinite valid orbit, all terms are multiples of 3.
+
+Suppose some term X=a_s even, not multiple of 3.
+All terms even (Lemma 1), so X' = a_{s+1}=f(X) is even.
+X even non-3: by Lemma A(i), f(X) < X; A(ii) with f even -> f(X) not div by3.
+So a_{s+1} even non-3, smaller. Same lemma applies again. Induction:
+for t>=s: a_t even, not divisible by3; a_{t+1} < a_t. Infinite strictly decreasing positive integers. Impossible. So cannot exist. So no term non-multiple of3.
+So: **every a_n is divisible by 3 as well as by 2.** So all a_n divisible by 6.
+
+So far: any valid infinite sequence: all terms multiples of 6, none odd.
+
+Perfect.
+
+--------------------------------------------------------------------------
+
+### 4. Analyze terms divisible by 6.
+
+So now: each a_n divisible by 6, and even.
+
+Look at any term N in orbit.
+
+When N divisible by6. Two possibilities: divisible by4 or not.
+
+If N not divisible by4: v2(N)=1.
+It's divisible by2,3 but no 4.
+So smallest divisors >1: d1=2, d2=3 always.
+Third d3:
+- If 5|N: then d3=5 (<6).
+- If 5∤N: d3=6 (since N divisible by6 always).
+So two subcases.
+
+If d3=5: triple (2,3,5). Formula f(N)=N/2+N/3+N/5=31N/30.
+Now N divisible by30 but not by4 -> N=30k k odd. So f(N)=31k odd.
+So successor is odd => impossible (Lemma 1: no odd term). So cannot occur.
+So in orbit, when term divisible by6 but not by4: 5 cannot divide it.
+
+So then d3=6. So for such N: d1,d2,d3 =2,3,6. Then f(N)=N/2+N/3+N/6=N. So fixed point.
+So any term divisible by6 but not by4 in a valid orbit must avoid 5, and is a fixed point.
+So exact set of fixed points: {N: N divisible by6, but not by4, not by5}. Good.
+
+So: In any valid orbit: if ever meet term not divisible by4, from that term on, sequence constant (fixed point). Great.
+
+So now structure: any valid orbit is eventually constant fixed point (multiples of 6, v2=1, no factor 5). Possibly from start.
+
+Need show indeed any orbit must hit such term finitely soon. Show can't stay divisible by4 forever.
+
+Suppose, to contrary, all terms always divisible by4. We've already lemma2: all terms divisible by3. So all terms divisible by12 always.
+If N divisible by12: smallest divisors >1 are 2,3,4. So f(N)= N/2 + N/3 + N/4 = 13N/12.
+So if all a_n divisible by4 forever: recurrence for all n: a_{n+1}=13 a_n /12.
+So exact: a_n = (13/12)^{n-1} a_1. In particular v3(a_{n+1})=v3(a_n)-1 every step (because multiply by 13/12, 1 factor 3 subtracted, nothing added). Start v3(a_1) finite. After t=v3(a_1) steps, v3(a_{t+1})=0, so a_{t+1} not divisible by3. But lemma2 said all a_n divisible by3. Contrad.
+So can't have all terms divisible by4 forever.
+
+So: there is first time a term is not divisible by4. Exactly.
+
+Let
+T := min { n>=1 : 4 ∤ a_n }. Finite by above.
+So a_T divisible by6 but not by4.
+
+By analysis above of non-4 multiples of6: in orbit, such term must be fixed point: must not be divisible by5, and then f=identity. So a_T is fixed point; hence a_{T+1}=a_T, a_{T+2}=a_T, ... constant from time T onward.
+
+So any valid infinite orbit: becomes constant at first non-4 term. Good.
+
+Now examine preceding terms (if any): n<T.
+By definition of T, for n<T, 4 | a_n. And always 3|a_n. So for n<T, a_n divisible by12.
+So for each n=1,...,T-1: three smallest divisors of a_n >1 are 2,3,4. So f(a_n)=a_n/2 + a_n/3 + a_n/4 = 13/12 a_n.
+So for n=1,...,T-1: exact relation a_{n+1} = 13/12 * a_n. So strictly increasing before T.
+
+So whole orbit structure: finite initial increasing chain with ratio 13/12 each step, then constant fixed point from time T onward. Exactly.
+
+Now parameterize.
+
+Value at time T (=first non-4) is fixed point: divisible by6, not by4, not by5.
+So a_T = 6 U, U odd positive, 5 ∤ U. Exactly family of fixed points.
+
+Now for earlier terms:
+a_1 = (12/13)^{T-1} * a_T.
+
+Let L = T-1 (could be 0). So a_1 = (12/13)^L * 6 U.
+
+Need a_1 integer. gcd(12,13)=1, gcd(6,13)=1. So need 13^L | U. So U=13^L V for some integer V.
+So V positive. U odd, 5 not divide U -> same for V: V odd, 5 not divide V.
+
+So a_1 = (12/13)^L * 6*13^L*V = 6*12^L * V.
+
+So necessary form:
+\[
+a_1 = 6 \cdot 12^L \cdot V, \quad L\ge 0 \text{ integer},\ V\ge1 \text{ odd},\ 5\nmid V.
+\]
+So that's necessity.
+
+So classification so far.
+
+Now sufficiency: show any such a_1 indeed works.
+
+So fix L>=0 integer, odd V>0, 5 ∤ V. Set a_1=6*12^L V. Define sequence by rule a_{n+1}=f(a_n). Need show it's valid infinite.
+
+If L=0: a_1=6V. Divisible by6 not by4 or5 (V odd, 5∤V). Its smallest divisors >1: 2,3,6. f(a_1)=a_1. So constant from start. Every term same; has at least proper divisors {1,2,3}; good. Valid.
+
+Now L>=1.
+
+I'll show explicit formula for first L+1 terms:
+Claim: for 1<=n<=L+1:
+a_n = 6*12^{L-n+1}*13^{n-1}*V.    (call it (*))
+
+n=1: true.
+
+Inductive for n<=L:
+Assume formula for a_n. Exponent of 12: L-n+1>=1, so a_n divisible by12 -> in particular by3 and by4.
+Any number divisible by3 and by4: smallest divisors >1 are exactly 2,3,4. So for N=a_n (n<=L), d1=2 d2=3 d3=4.
+So recurrence: a_{n+1}=a_n/2+a_n/3+a_n/4=13 a_n/12.
+Plug in formula for a_n -> get a_{n+1}=6*12^{L-(n+1)+1}*13^n V. Exactly formula for n+1. Induction. So (*) holds for n=1..L+1.
+
+So a_L divisible by12, a_{L+1}=13/12 a_L = 6*13^L V.
+
+Now check a_{L+1}: a_{L+1}=6 U with U=13^L V. V odd -> U odd. V not divisible by5 -> U not divisible by5. And 13^L odd. So a_{L+1} divisible by6, but its 2-adic val is exactly 1 (only from 6), so not divisible by4. Not divisible by5. So a_{L+1} is exactly from fixed point set.
+
+So d1,d2,d3 of a_{L+1}: 2,3,6. So f(a_{L+1})=a_{L+1}/2+a_{L+1}/3+a_{L+1}/6=a_{L+1}. So from index L+1 on, constant equal to a_{L+1}. So indeed defined forever.
+
+Also each a_n has at least three proper divisors:
+for n<=L, a_n divisible by12 -> divisors {1,2,3,4,6,...}, at least three proper.
+n>=L+1 constant at a_{L+1}, divisible by6 -> has {1,2,3} at least.
+So all good. So sequence valid infinite. Exactly.
+
+So sufficiency done.
+
+So exact set of possible initial values is precisely that family.
+
+So answer set:
+\[
+\boxed{ a_1 = 6 \cdot 12^L \cdot V,\ L=0,1,2,\ldots,\ V \text{ odd positive},\ 5\nmid V. }
+\]
+
+That's full.
+
+Checks: L=0: a_1=6*odd, gcd(odd,5)=1 -> precisely numbers divisible by6, odd quotient, not multiple 5, i.e., divisible by6 but not by4 or5: fixed points. L>=1: first is 72*odd not mult by5, exactly preimages, longer chains 864*odd not mult 5, etc. Exactly.
+
+That's complete.
+
+\(\boxed{}\)

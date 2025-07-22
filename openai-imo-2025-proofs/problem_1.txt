@@ -1,0 +1,228 @@
+### PROBLEM 1 SUBMISSION ###
+
+\[
+P_n:=\{(a,b)\in \mathbf Z_{>0}^2: a+b\le n+1\}, \quad n\ge 3.
+\]
+Need families of n lines covering P_n.  "Sunny": direction not in {horizontal, vertical, slope -1}.
+Need possible numbers of sunny lines in an n-line covering.
+
+--------------------------------------------------------------------------
+
+### 1. Basic configs, notation.
+
+For n: triangle in plane: T_n = {x>=1,y>=1,x+y<=n+1}, vertices (1,1),(1,n),(n,1). P_n = integer points in it.
+
+Three sides lines: H_n: y=1 bottom, V_n: x=1 left, D_n: x+y=n+1 hyp. Exactly forbidden directions.
+
+So "non-sunny" = line parallel to one of triangle sides. Good.
+
+Let K_n = { k : exists n distinct lines covering P_n with exactly k sunny }.
+
+n>=3 fixed.
+
+Goal: determine K_n for all n.
+
+Will prove: K_n={0,1,3}, independent of n.
+
+So main is: (a) for n>=4, any n-line cover must contain a side-line; inductively reduce to n=3. (b) Analyze n=3 exactly.
+
+Also need constructions for k=0,1,3 for all n.
+
+--------------------------------------------------------------------------
+
+### 2. Lemma: n>=4, any n-line cover of P_n must use a side of triangle.
+
+Call boundary point set of triangle:
+B_n = P_n ∩ (H_n ∪ V_n ∪ D_n): all integer points on 3 sides.
+Count: each side has n lattice points. Three vertices each in two sides, no triple. So |B_n|= n+n+n -3=3n-3.
+
+Now: L = {ℓ_1,...,ℓ_n} n distinct lines, cover all P_n. Suppose none of ℓ_i coincide with H_n,V_n,D_n.
+
+Need contradiction for n>=4.
+
+Geometry: T_n (filled triangle) is convex. Intersect any line ℓ with T_n:
+ℓ∩T_n is empty / point / segment. If ℓ doesn't contain whole side (that's assumption), then ℓ∩∂T_n has at most two points (if segment, two endpoints). So: any line not equal to a side contains at most 2 points of boundary of T_n.
+
+So each ℓ_i contains at most 2 points of B_n. So n lines cover at most 2n boundary points. But must cover all B_n (subset of P_n). Need 2n >= |B_n|=3n-3. For n>=4, 3n-3 >2n (difference n-3>0), impossible. Contradiction. So for n>=4, in any n-line cover of P_n, at least one of three side lines H_n, V_n, D_n is present. Exactly lemma. Good.    (that's main structural lemma)
+
+So n>=4: any configuration has a boundary side line (non-sunny).
+
+Now reduction from n to n-1.
+
+Suppose n>=4, have n-line family L for P_n. Lemma gives side line E in L.
+
+Remove E, get n-1 remaining lines.
+
+Need show remaining (after appropriate translation) is configuration for P_{n-1}, same #sunny.
+
+Three cases:
+
+1) E = D_n: hyp line x+y=n+1. P_n \ D_n = {integer>=1 with sum<=n} = P_{n-1} exactly. D_n only hits sum=n+1 points, disjoint from P_{n-1}. So remaining n-1 lines alone cover P_{n-1}. Done, no transform.
+
+2) E=H_n (y=1). Remaining points of P_n besides H_n: y>=2. Mapping down by 1 in y:
+bijection T: (x,y+1) ↔ (x,y), between P_n \ H_n and P_{n-1}. Exactly: if (a,b) in P_{n-1}, (a,b+1) in P_n, y>=2, sum a+b+1<=n+1. Conversely.
+Take remaining n-1 lines ℓ in L\{H_n}, translate downward by vector (0,-1). family L' size n-1. For any p in P_{n-1}, p+(0,1) is in P_n \ H_n, covered by some ℓ; shift ℓ down, p covered by ℓ'. So L' covers P_{n-1}. Translation preserves direction -> sunny status same.
+
+3) E=V_n (x=1), same via shift (-1,0). Exactly same.
+
+So any n-line cover for P_n (n>=4) -> n-1-line cover for P_{n-1}, same #sunny.
+
+So iterate: for n>=4, reduce n -> n-1 -> ... -> 3. Each step n>=4 (when parameter>=4) lemma applies. So any configuration for P_n (any n>=4) produces configuration for P_3 with same number of sunny lines. So possible k for n>=4 are subset of K_3. Great.
+
+So main task now: compute K_3. And also show 0,1,3 achievable all n. Then done.
+
+So: need analyze n=3 precisely, and constructions.
+
+--------------------------------------------------------------------------
+
+### 3. Analyze n=3 exactly.
+
+S := P_3 = {positive ints (a,b), a+b<=4}: 6 points.
+List as:
+A=(1,1), B=(1,2), C=(1,3), D=(2,1), E=(2,2), F=(3,1). Exactly 6.
+
+First enumerate non-sunny lines' intersections with S.
+
+Non-sunny directions: vertical x=const, horizontal y=const, diagonal x+y=const.
+
+Inside S:
+Verticals: x=1: {A,B,C} (size3), x=2:{D,E} size2, x=3:{F}.
+Horiz: y=1 {A,D,F} size3, y=2 {B,E} size2, y=3 {C}.
+Diagonal: sums:2:{A} ,3:{B,D} size2, 4:{C,E,F} size3.
+So any non-sunny line intersection with S is subset of one of:
+three size3 sets: {A,B,C}; {A,D,F}; {C,E,F};
+three size2: {B,E}; {D,E}; {B,D}. (size1 irrelevant).
+
+So far.
+
+Need structure of sunny lines within S.
+
+List all unordered pairs of points in S and check forbidden condition:
+Forbidden if x equal or y equal or sum equal.
+Pairs:
+A-B same x -> forbidden.
+A-C same x forbidden.
+A-D same y forbidden.
+A-E: x=1 2 different, y=1 2 different, sums 2 vs4 different -> NOT forbidden.
+A-F same y forbidden.
+B-C same x forbidden.
+B-D: B (1,2), D(2,1), sums both 3 -> forbidden (diag).
+B-E same y forbidden.
+B-F sums 3 vs4, x y different -> NOT forbidden.
+C-D: C(1,3), D(2,1), sums 4 vs3 diff -> NOT forbidden.
+C-E sums both 4 forbidden.
+C-F sums both 4 forbidden.
+D-E same x forbidden.
+D-F same y forbidden.
+E-F sums both 4 forbidden.
+
+So only nonforbidden pairs: {A,E}, {B,F}, {C,D}. Exactly three.
+
+So any line through at least two S points and sunny must be line through one of those pairs.
+
+Need show those three sunny lines contain no third S point:
+Through A,E: equation y=x. Other four points all have y≠x, none on it.
+Through B,F: points (1,2),(3,1): line x+2y=5. Check other four: A gives 3, C gives 7, D gives4, E gives6, none 5.
+Through C,D: (1,3),(2,1): line 2x+y=5. Others: A 3, B4, E6, F7, none 5. So indeed only those two points.
+
+So key: **any sunny line meets S in at most 2 points.** Good lemma for S3.
+
+Now determine K_3.
+
+First, existence:
+k=0: 3 lines x+y=2,3,4 (all non-sunny). cover.
+k=1: {x=1, y=1, y=x}. x=1 has A,B,C; y=1 has A,D,F; y=x has A,E. cover. Only y=x sunny ->k=1.
+k=3: three sunny lines just described:
+y=x (A,E), x+2y=5 (B,F), 2x+y=5 (C,D). Cover all 6. all three sunny ->k=3.
+
+So {0,1,3} achievable for n=3.
+
+Now show k=2 impossible.
+
+So suppose 3 lines L1,L2,L3 covering S3, exactly two sunny. Let N be the (unique) non-sunny line.
+
+Let t=|N∩S| (# points of S on N). Need t>=2:
+Because two sunnies each can contain at most 2 S points (lemma). So |S|=6 = |L1∪L2∪N ∩S| <= |L1∩S|+|L2∩S|+|N∩S| <=2+2+t. So 6<=t+4 => t>=2. Good.
+
+So N is one of forbidden subsets of S of size 2 or 3 listed above. Enumerate all possibilities, each impossible with two sunnies.
+
+I'll do cases.
+
+Size 3 possibilities for N:
+H3={A,D,F} (y=1), V3={A,B,C} (x=1), D3={C,E,F} (sum=4).
+
+Take N=H3. Remaining R= S\N = {B,C,E}.
+Pairs within R:
+B-C same x forbidden; B-E same y forbidden; C-E sums both 4 forbidden. So any sunny line can include at most one point of R. Two sunnies => at most 2 points of R covered, but 3 points need cover, impossible. Same exact pattern for other size3's:
+If N=V3, R={D,E,F}: D-E vertical forbidden, D-F horiz forbidden, E-F diag forbidden.
+If N=D3, R={A,B,D}: A-B vertical forbidden, A-D horiz forbidden, B-D diag forbidden. Same. So all size3 cases impossible.
+
+So N size must be 2. Three size2 forbidden sets:
+Nh = {B,E} (y=2), Nv={D,E} (x=2), Nd={B,D} (sum=3).
+
+Need handle each.
+
+Remember again: any sunny line can contain at most 2 S points.
+
+Case N= {B,E}: R= S\N= {A,C,D,F} (4 points).
+Need cover R with two sunnies, each can cover at most 2 points -> to cover 4, each sunny must contain exactly 2 R points.
+Now point A=(1,1) in R. Check all other points of R:
+with C=(1,3): same x -> forbidden.
+with D=(2,1), F=(3,1): same y -> forbidden.
+So A has NO sunny partner within R. So any sunny line that covers A contributes only that one R point. But to cover 4 points with two sunnies, each must bring 2 R points. Contradiction. So N={B,E} impossible.
+
+Case N= {D,E}: R={A,B,C,F} (A same argument). A=(1,1) forbidden with B,C,F (same x or y), so any sunny covering A covers only A among R, but need each of two sunnies cover 2 of 4 -> impossible. So N={D,E} impossible.
+
+Case N= {B,D}: R={A,C,E,F}.
+Need cover 4 points by two sunnies. Look at point C=(1,3) in R.
+Possible partners for C within R:
+With A=(1,1), x same forbidden.
+With E=(2,2): sums both 4 forbidden diag.
+With F=(3,1): sums both 4 forbidden diag.
+So C has no sunny partner within R. Same contradiction: the sunny covering C can carry only C from R, but to cover 4 points with two lines each max2, each must carry 2 -> impossible. So N={B,D} impossible.
+
+So all possibilities for N fail. So no configuration with exactly 2 sunny for n=3. So K_3 = {0,1,3}. Done.
+
+So for n=3, possible k exactly 0,1,3.
+
+That's full base.
+
+--------------------------------------------------------------------------
+
+4. Now for general n>=3: need existence of configs for k=0,1,3 for every n.
+
+Already k=0: n diagonals x+y=2,3,...,n+1. All non-sunny, covers P_n. Good.
+
+Now k=1 construction for every n:
+Define family F_n^1 inductively by adding outer hyp lines.
+
+Base n=3: F_3^1 = { x=1, y=1, y=x }. Exactly 3 lines, covers P_3. Only y=x is sunny.
+
+Now induction: Suppose F_{m-1}^1 (m-1 lines) covers P_{m-1} with exactly 1 sunny.
+Define F_m^1 := F_{m-1}^1 ∪ {x+y=m+1} (add current hyp line). That's m lines, distinct (new hyp has new sum, not present earlier). Cover check:
+Any point with sum<=m: in P_{m-1}, covered by old lines. Any point with sum=m+1 (new outer layer): on new hyp. So covers P_m. New line is diagonal non-sunny. So sunny count stays 1. So by induction F_n^1 exists for all n>=3. Good.
+
+k=3 construction:
+Base n=3: three sunny lines as in K_3:
+L1: y=x, L2: x+2y=5 (through (1,2),(3,1)), L3: 2x+y=5 (through (1,3),(2,1)). All sunny.
+Now for n>3, add outer hyp diagonals.
+Define F_n^3 = {those three base sunny} ∪ {x+y=t for t=5,6,..., n+1}. There are n-3 added hyp lines, total n lines. Distinct.
+Coverage: Any (a,b) in P_n. If a+b>=5, it's on some x+y=t, t between 5 and n+1, included. If a+b<=4, that's exactly P_3; and base three sunny lines cover all 6 points of P_3 (check). So P_n covered. Newly added hyp lines are non-sunny. So overall F_n^3 has exactly 3 sunny, for all n>=3. Good.
+
+So k=0,1,3 attainable for all n>=3.
+
+--------------------------------------------------------------------------
+
+5. Finish main direction using reduction lemma.
+
+Let n>=4 arbitrary, suppose configuration of n lines covering P_n has k sunny. Apply Lemma from step 2: has a side line. Remove it, translate if horizontal/vertical as described -> get configuration of n-1 lines for P_{n-1} with same k. So any k achievable for n>=4 is also achievable for n-1. Iterate down: n->n-1-> ... ->4->3. At each step parameter>=4, lemma works. End: configuration for P_3 with same k. So any achievable k for any n>=4 is in K_3. And n=3 itself computed K_3 = {0,1,3}. So for all n>=3, K_n ⊆ {0,1,3}.
+
+Combined with existence constructions above for each n and each k in {0,1,3}: K_n contains {0,1,3}. So equality: K_n = {0,1,3} for every n>=3.
+
+So exact set of possible k: precisely 0, 1, 3 (independent of n).
+
+That's full.
+
+--------------------------------------------------------------------------
+
+Final answer: \(\boxed{\text{For every } n\ge3,\; \text{possible } k \text{ are exactly } 0,1,3.}\)

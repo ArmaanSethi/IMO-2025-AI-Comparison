@@ -1,0 +1,201 @@
+### PROBLEM 5 SUBMISSION ###
+
+\[
+S_m:=\sum_{i=1}^m x_i,\ Q_m:=\sum_{i=1}^m x_i^2.
+\]
+Odd m: Alice legality: S_m \le \lambda m.    Even m: Bazza legality: Q_m \le m.  
+Nonnegative moves.
+
+Need parameter sets where one side has forcing win.
+
+Constant that appears: c:=1/\sqrt2 = \sqrt2/2.
+
+------------------------------------------------------------------------
+
+### 1. Some elementary facts.
+
+A function on [0, sqrt2]:
+f(t):= t + sqrt(2 - t^2), domain t\in[0, \sqrt2].
+Identity: (f(t))^2 = t^2 + 2 - t^2 + 2 t sqrt(2 - t^2) = 2 + 2 t sqrt(...) \ge 2 (t>=0). So f(t) \ge sqrt2. So:
+(**) For 0<=t<=sqrt2: t + sqrt(2 - t^2) \ge sqrt2. Equality at t=0, t=sqrt2.
+
+So any pair (a,b) with a^2 + b^2=2 and a,b nonneg has sum>= sqrt2.
+
+Also simple C-S:
+For nonnegative u_1..u_m with sum of squares U<=T: sum u_i <= sqrt(m)* sqrt(T).
+
+That's all.
+
+So constant c=1/√2.
+
+Problem: for which λ each player has winning.
+
+We'll show exact: Alice wins iff λ>c; Bazza wins iff λ<c; at equality none.
+
+So split at 1/√2.
+
+-----------------------------------------------------------------------
+
+### 2. Alice survives always when λ>=c (zero defense).
+
+First lemma (passive zeros): Suppose Alice plays 0 on all odd turns. Any legal play by Bazza on evens (Q_{2k}<=2k). For even 2k:
+Only even terms nonzero: S_{2k}= Σ_{j=1}^k x_{2j}, k terms. Q_{2k}=Σ x_{2j}^2<=2k. CS:
+S_{2k} <= sqrt(k)* sqrt(Q_{2k}) <= sqrt(k)* sqrt(2k) = sqrt2*k.
+
+So for her odd turn n=2k+1, starting sum is S_{2k}<= sqrt2*k.
+Need check legality of playing 0: need S_{odd}<= λ(2k+1). indeed:
+c=1/√2: c(2k+1) = √2*k + √2/2 > √2*k. If λ>=c, λ(2k+1) >= c(2k+1) > √2*k >= S_{2k}. So 0 is always legal.
+So for any opponent play, she can perpetually play zeros if λ>=c. So Bazza cannot have winning strategy for any λ>=c (in particular equality). Good.
+
+That's later.
+
+------------------------------------------------------------------------
+
+Now actual winning sets.
+
+### 3. Alice wins for λ>c.
+
+Fix λ>c. She will: play 0 forever until some large odd N, then huge final move and win immediately.
+
+Need bounds independent of B's play.
+
+During zeros phase (all odd indices <N zero), S_{2k}=sum even terms only, by legality Q_{2k}<=2k. Same CS bound: S_{2k}<= √2*k = c*(2k). Good.
+
+Now choose large odd N. Define L_N:= λ N - c (N-1) = (λ - c) N + c. Since λ>c, linear coefficient positive. For large N, L_N linear ->∞. Need L_N > sqrt(N+1); possible for large N. Fix odd N with that property (also positive). Fixed N.
+
+Strategy for A:
+- On odd n < N: play x_n=0 always.
+Legality of these zeros: at any intermediate odd 2k+1 < N, S_{2k}<= √2*k < λ(2k+1), as above (λ>c), so zeros legal regardless B's play.
+
+At chosen N=2K-1 (K=(N+1)/2): before her move, sum S_{N-1}=S_{2K-2}. Any B play with Q_{2K-2}<=2K-2: CS gives S_{2K-2}<= √2*(K-1)= c (N-1). So budget at N:
+B_N := λ N - S_{N-1} >= λ N - c(N-1) = L_N > sqrt(N+1). nonnegative.
+Now at turn N, she plays x_N = B_N. Then S_N=λ N exactly (legal). Q_N>= x_N^2 = B_N^2 > N+1. N odd, next even is N+1. At Bazza's next turn (even N+1), legality requires Q_{N+1}<= N+1; but already Q_N> N+1, can't pick any nonnegative. He loses immediately. So she wins.
+
+So for all λ>c, Alice has winning. Good.
+
+So Alice-winning set at least (c,∞).
+
+------------------------------------------------------------------------
+
+### 4. Bazza wins for λ < c (=1/√2).
+
+Now main part.
+
+Fix 0<λ < c.
+
+Need explicit winning strategy for Bazza.
+
+Bazza's strategy: On each of his turns (even index 2j): look at current total Q_{2j-1}; set
+x_{2j} := sqrt( 2j - Q_{2j-1}). i.e. maximal allowed so that Q_{2j} becomes exactly 2j. (If game reached his turn, necessarily Q_{2j-1}<=2j or else game already ended with his loss; so radicand nonnegative.)
+So policy: always saturate sum of squares to limit at each even turn.
+
+Need show: against any legal moves by Alice, with this policy, Bazza inevitably wins when λ<c.
+
+Notation: a_j := x_{2j-1} (Alice's odd moves). b_j := x_{2j} (Bazza responses by strategy).
+
+So recurrence from policy: Suppose after even 2j-2, Q_{2j-2}=2j-2 (we'll get exact). At odd 2j-1, Alice picks a_j. Then Q_{2j-1}= (2j-2)+ a_j^2. At his even 2j, he sets b_j^2=2j - Q_{2j-1} = 2 - a_j^2. So indeed b_j= sqrt(2 - a_j^2), depends only on a_j. And Q_{2j}=2j exact. So invariant will hold.
+
+So everything decouples into pairs (a_j, b_j= sqrt(2 - a_j^2)). Define f(a):= a + sqrt(2 - a^2), same f as lemma. Domain requires a_j<= sqrt2; if a_j> sqrt2, game ends immediately with Alice's win (Q_{odd}>next even). We'll show for λ<c that legality prevents any a_j>sqrt2 anyway.
+
+Observation from lemma: for t in [0,sqrt2], f(t) >= sqrt2. (key).
+
+So under his strategy, after j pairs (even 2j), total sum is
+S_{2j} = Σ_{i=1}^j (a_i + b_i) = Σ_{i=1}^j f(a_i).
+
+So task: show for λ<c, in any legal play vs him,
+all a_i<= sqrt2, so each f>=sqrt2, so S_{2j}>= j sqrt2. Then for large j, j sqrt2 > λ(2j+1), so she can't make move at that odd -> she loses. That's exact.
+
+So need: prove a_i<= sqrt2 indeed forced by legality when λ<c.
+
+Do induction.
+
+Invariant to prove under his strategy for continuing game:
+
+For each j>=1 (before j-th odd), game not ended,
+(i) after (j-1)-th even, Q_{2j-2}=2j-2 (his saturation exact).
+(ii) all previous a_1,...,a_{j-1} <= sqrt2.
+
+Base j=1: before start, Q_0=0, true.
+
+j=1 actual a_1? At turn 1 legality: a_1=x_1<=λ. λ<c<sqrt2. So a_1<sqrt2. Good start.
+Now his turn n=2: Q_1=a_1^2<=λ^2<2, set b_1=sqrt(2 - a_1^2). Then Q_2=2. So after first even, invariant holds for j=2.
+
+Now inductive step: Suppose invariant for j (meaning before Alice's j-th odd, after even 2j-2). So previous a_i <= sqrt2 and Q_{2j-2}=2j-2.
+
+Need bound on a_j she can pick at odd 2j-1, under legality of sum.
+First compute current sum S_{2j-2}: by strategy, for i<j, b_i = sqrt(2 - a_i^2), so S_{2j-2}= Σ_{i=1}^{j-1} f(a_i).
+Each a_i<=sqrt2 by IH, so each f(a_i)>= sqrt2 (lemma). So S_{2j-2}>= (j-1) sqrt2.
+
+Now legality for Alice at turn 2j-1: must pick nonnegative a_j with S_{2j-2}+a_j <= λ(2j-1). So necessarily
+a_j <= λ(2j-1) - S_{2j-2} <= λ(2j-1) - (j-1) sqrt2 =: G_j.
+
+So bound G_j. Now show G_j < sqrt2 always when λ<c, all j.
+
+Compute: Need λ(2j-1) < j sqrt2.
+Since λ < c=1/ sqrt2, λ(2j-1) < c(2j-1) = (2j-1)/ sqrt2.
+Compare to j sqrt2 = (2j)/sqrt2. And (2j-1) < 2j. So c(2j-1) < j sqrt2. So strict: λ(2j-1) < j sqrt2. So G_j = λ(2j-1) - (j-1) sqrt2 < j sqrt2 - (j-1) sqrt2 = sqrt2. Exactly. So G_j < sqrt2. So legality forces a_j <= G_j < sqrt2. So a_j < sqrt2. That's new part of invariant (ii).
+
+Now his even 2j response:
+Current Q_{2j-1} = Q_{2j-2}+ a_j^2=2j-2 + a_j^2 <=2j (since a_j^2<=2). So radicand nonnegative. Define b_j= sqrt(2j - Q_{2j-1})= sqrt(2 - a_j^2). Legal. And Q_{2j}=Q_{2j-1}+b_j^2=2j exactly. So (i) for j+1 holds. Induction done.
+
+So under his strategy and any legal continuation (never ended), all odd a_j < sqrt2. In particular she can never pick > sqrt2 -> cannot win by immediate Q overshoot (winning for her would need a_j> sqrt2 since before his turn Q=2j-2; only way to push beyond next even is square>2). So he never loses via Q.
+
+Now sums. At even 2k: S_{2k}= Σ_{i=1}^k f(a_i), each a_i<= sqrt2 -> f(a_i)>= sqrt2. So S_{2k} >= k sqrt2 always.
+
+Now take k large. Need eventual violation of her sum bound at odd. Look at ratio
+r_k := sqrt2*k/(2k+1). It's strictly increasing: check r_{k+1}-r_k:
+(k+1)/(2k+3) - k/(2k+1) =1/((2k+3)(2k+1))>0, so increasing. Limit as k->∞ is sqrt2/2 = c.
+Now λ < c, and r_k increases to c from below, so exists integer K with r_K > λ. Equivalently sqrt2*K > λ(2K+1). Fix such K.
+
+Now in game under his strategy: at time even 2K, S_{2K}>=K sqrt2 > λ(2K+1). That's sum of first 2K terms. Next is Alice's turn at odd 2K+1. Condition she must satisfy for any x>=0: S_{2K} + x <= λ(2K+1). But S_{2K} already > RHS, x>=0, impossible. So she cannot move at turn 2K+1. So game must have ended at or before that, and can't be by his loss (no overshoot), so it's her loss. So Bazza wins. Exactly.
+
+So for all λ < c =1/ sqrt2, Bazza has winning strategy: saturation of Q each even turn.
+
+That's case 2.
+
+------------------------------------------------------------------------
+
+Now boundary λ=c.
+
+Need show neither has winning.
+
+First, same zeros defense of Alice from first lemma works for all λ>=c including equality: she can play x_{odd}=0 always, legality always (same CS argument). So Bazza cannot have winning when λ=c.
+
+So only show at λ=c, Alice has no winning.
+
+So fix λ=c. Let Bazza play same saturation strategy as above (on even 2j choose x_{2j}:= sqrt(2j - current Q)). Show Alice can never win against this response.
+
+Need again induction/bounds.
+
+Same as before but compute bound exact now.
+
+Let a_j be her odds. Suppose game continues with legality (as she plays). We'll show inductively: for all j reached, Q_{2j}=2j (as per Bazza definition), and a_j <= c (=1/√2). In particular < sqrt2, so she never overshoots into immediate win.
+
+Base j=1: a_1<=λ = c. good.
+
+Assume for first j-1 odds, a_i<=c. Then at odd 2j-1 before choosing a_j: previous sum at even 2j-2 is S_{2j-2} = Σ_{i=1}^{j-1}f(a_i), where again f(a_i)=a_i+ sqrt(2 - a_i^2), well-defined because a_i<=c<sqrt2. f>=sqrt2 always. so S_{2j-2}>= (j-1) sqrt2.
+
+Legality for her at this odd: S_{2j-2} + a_j <= c*(2j -1), thus
+a_j <= c*(2j -1) - S_{2j-2} <= c*(2j -1) - (j-1) sqrt2.
+Now compute RHS: c*(2j -1) - (j-1)* sqrt2.
+c=1/ sqrt2, so rhs = (2j-1)/sqrt2 - (j-1)*sqrt2 = (2j-1 -2j +2)/sqrt2 = 1/ sqrt2 = c. Exact. So a_j<= c. Great. That's new step, so all a_j<=c always.
+
+So indeed she can never choose > sqrt2; hence never causes Q overshoot; thus Bazza will always be able to play and legality each even holds (definition gives Q_{even}=even).
+
+So under his saturate response, he never loses. For her to win, must make him unable at some even -> would need Q_{even-1}>even, i.e. some a_j> sqrt2. but we just showed always a_j<=c< sqrt2. So she can never cause his loss. So against this fixed response of his, she never wins (outcomes: may be infinite or she may lose by sum if she picks badly; but no win). So she does NOT have winning strategy at λ=c.
+So at equality, neither player has winning strategy.
+
+So sets:
+Alice winning: all λ>1/√2.    Bazza winning: all λ<1/√2. Exactly.
+
+That's full.
+
+------------------------------------------------------------------------
+
+\[
+\boxed{\text{Alice has winning iff } \lambda > 1/\sqrt2; \quad \text{Bazza has winning iff } \lambda < 1/\sqrt2; \text{ at } \lambda=1/\sqrt2 \text{ neither.}}
+\]
+
+That's precisely.
+
+Done.
