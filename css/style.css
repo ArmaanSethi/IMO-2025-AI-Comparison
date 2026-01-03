@@ -271,3 +271,54 @@ body {
     font-size: 1rem;
     line-height: 1.6;
 }
+
+/* Collapsible FAQ Styling */
+details.faq-item {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    cursor: pointer;
+}
+
+details.faq-item:last-child {
+    border-bottom: none;
+}
+
+summary {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    list-style: none; /* Hide default triangle */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+}
+
+details[open] summary::after {
+    transform: rotate(45deg);
+}
+
+details[open] summary {
+    margin-bottom: 0.5rem;
+}
+
+details.faq-item p {
+    color: #475569;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 0;
+}
