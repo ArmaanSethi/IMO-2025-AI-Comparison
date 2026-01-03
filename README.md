@@ -52,9 +52,16 @@ To run this project locally:
 
 ## 📚 Sources
 
-*   [DeepMind Blog: Advanced AI for Math](https://deepmind.google/discover/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/)
+Solving 5 out of 6 problems officially, marking a historic milestone in AI mathematical
+
+...
+
+## 📚 Sources
+
+*   [DeepMind IMO 2025 Official Blog: Gemini Deep Think](https://deepmind.google/discover/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/)
+*   [DeepMind IMO 2024 Blog: AlphaProof](https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/)
+*   [OpenAI IMO 2025 Proofs (GitHub)](https://github.com/aw31/openai-imo-2025-proofs)
 *   [DeepMind IMO 2025 Solutions (PDF)](https://storage.googleapis.com/deepmind-media/gemini/IMO_2025.pdf)
-*   [OpenAI o3 Solutions Data](https://github.com/aw31/openai-imo-2025-proofs)
 
 ## Acknowledgments
 
