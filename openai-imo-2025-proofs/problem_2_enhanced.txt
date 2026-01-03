@@ -1,0 +1,442 @@
+### PROBLEM 2 SUBMISSION ###
+
+$$
+\Omega: \text{center } M, \text{radius } r,\quad 
+\Gamma: \text{center } N, \text{radius } R,\ $R>r$,\ \Omega\cap \Gamma=\{A,B\},\ A\neq B.
+$$
+MN is line of centers. C = second MN cap $\Omega$ (on M side opposite N), D = second MN cap $\Gamma$ to right of N: order C,M,N,D on MN.
+P = circumcenter of triangle ACD. AP meets $\Omega$ again at E, $\Gamma$ again at F. H = orthocenter of PMN.
+Need: through H, line parallel AP is tangent to circumcircle of B,E,F.
+
+--------------------------------------------------------------------------
+
+### 1. Analytic setup, parameters.
+
+Standard intersecting-circle coordinates.
+
+Put M at origin, MN as x-axis. N is (d,0), d=MN>0. x-axis oriented M->N.
+Radii: $\Omega$: r (at origin), $\Gamma$: R at (d,0), given $R>r$, two intersection points.
+
+So equations:
+$\Omega$: $x^2+y^2$ = $r^2$.
+$\Gamma$: $(x-d)^2$ + y^2= $R^2$.
+
+Intersect at A,B: same x, y opposite. Classic.
+Let x-coordinate be $x_0$, y positive be $y_0$: A=($x_0$,$y_0$), B=($x_0$,-$y_0$).
+So unknown $x_0$, $y_0$. From A on both circles:
+$x_0$^2 + $y_0$^2 = $r^2$, (d-$x_0$)^2 + $y_0$^2 = $R^2$. Good relations.
+Subtract: 2 d $x_0$ = $d^2$ + $r^2$ - $R^2$. So explicit:
+$x_0$ = ($d^2$ + $r^2$ - $R^2$) / (2 d). Fixed by d,r,R. Good.
+So A,B fixed x-coordinate.
+
+Notation now: $U := R - r$ >0, $V := R + r$, $S := d + V$ = d+R+r, $K := V - d$ = R + r - d. (Circles intersect: |R-r|<d<R+r, so $U<d<V$; $K>0$.)
+So S,K,U,V all positive.
+
+Need $y_0$^2 formula in S,K,U,d:
+Compute $y_0$^2 = $r^2$ - $x_0$^2 with $x_0$ above:
+4 $d^2y_0$^2 = 4 $d^2r^2$ - ($d^2$ + $r^2$ - $R^2$)^2.
+Difference of squares:
+= [2dr - ($d^2$ + $r^2$ - $R^2$)] [2dr + ($d^2$ + $r^2$ - $R^2$)]
+= [$R^2$ - (d-r)^2] [ (d+r)^2 - $R^2$ ].
+Now factors:
+$R^2$ - (d-r)^2= (R+r-d)(R + d - r) = K (d+U).
+(d+r)^2 - $R^2$ = (d+r-R)(d+r+R) = (d-U) S.
+Multiply: K S (d+U)(d-U) = S K ($d^2$ - $U^2$). So:
+(**) 4 $d^2y_0$^2 = S K ($d^2$ - $U^2$). Exactly. We'll use this a lot.
+
+So coordinates of A,B known: ($x_0$, ± $y_0$), $y_0$>0.
+
+C,D on x-axis: $\Omega$ cuts x-axis at (-r,0),(r,0); order C,M,N,D pipe: C is left intersection: (-r,0). D is right intersection of $\Gamma$: (d+R,0). Good.
+
+So coordinate framework fixed.
+
+Everything in terms of d,r,R, and $x_0$,$y_0$ satisfying above.
+
+--------------------------------------------------------------------------
+
+### 2. Locate P = circumcenter of triangle A C D.
+
+C=(-r,0), D=(d+R,0), both on x-axis.
+Perp bisector of CD is vertical line at x = (-r + d+R)/2 = (d+R - r)/2. So $P_x$ fixed:
+t := (d+R - r)/2 = (d+U)/2. that's $P_x$.
+
+Let P=(t, p). Need p= $P_y$.
+
+Condition PC=PA (P is circumcenter of A,C,D).
+Distance to C (-r,0): (t+r)^2 + p^2. To A ($x_0$, $y_0$): (t - $x_0$)^2 + (p - $y_0$)^2. Equal:
+(t+r)^2 + p^2 = (t - $x_0$)^2 + p^2 - 2 p $y_0$ + $y_0$^2.
+So 2 p $y_0$ = (t - $x_0$)^2 - (t+r)^2 + $y_0$^2. Solve p.
+
+Need p linear in $y_0$ ultimately.
+
+Compute t±$x_0$:
+t+r: t=(d+U)/2, +r -> t+r = (d+U)/2 + r= (d+U +2r)/2= (d+R+r)/2= S/2. Good.
+t - $x_0$: t - $x_0$ = (d+U)/2 - ($d^2$ + $r^2$ - $R^2$)/2d. Numerator:
+d(d+U) - ($d^2$ + $r^2$ - $R^2$) = dU + $R^2$ - $r^2$ = U (d+V) = U S. So t - $x_0$ = $US/(2d)$. Good.
+
+So (t - $x_0$)^2 - (t+r)^2 = $S^2$/(4 $d^2$)($U^2$ - $d^2$) = - $S^2$ ($d^2$ - $U^2$) / (4 $d^2$).
+
+Now add $y_0$^2. From (**): $y_0$^2= S K ($d^2$ - $U^2$)/ (4 $d^2$).
+So (t - $x_0$)^2 - (t+r)^2 + $y_0$^2 = [ -$S^2$ + S K] ($d^2$ - $U^2$)/(4 $d^2$)
+= S(K - S)($d^2$ - $U^2$)/ (4 $d^2$). K - S = (V - d) - (d+V) = -2d.
+So equals - S ($d^2$ - $U^2$)*2d/(4 $d^2$)= - S ($d^2$ - $U^2$)/ (2 d).
+
+So 2 p $y_0$ = - S ($d^2$ - $U^2$)/ (2 d). So p/$y_0$ = - S ($d^2$ - $U^2$)/ (4 d $y_0$^2).
+
+Now $y_0$^2 from (**): $y_0$^2= S K ($d^2$ - $U^2$)/ (4 $d^2$). Plug:
+p/$y_0$= - S ($d^2$ - $U^2$)/ (4 d) / [ S K ($d^2$ - $U^2$)/ (4 $d^2$)] = - $d/K$.
+So exact linear relation: p = - ($d/K$) $y_0$. Great, no surds.
+
+So P coordinates:
+P = (t, p) with t=(d+U)/2, p= - ($d/K$) $y_0$. K=V - d (=R+r - d). Exactly.
+
+So: $P_x$ t fixed, $P_y$ proportional to $y_0$.
+
+So far: A=($x_0$, $y_0$), P=(t, - $d/Ky_0$).
+
+So direction along line AP:
+v := P - A.
+v_x = t - $x_0$ = $US/(2d)$, (computed above).
+v_y = p - $y_0$ = - $d/Ky_0$ - $y_0$ = - (d+K)/K $y_0$ = - $V/Ky_0$, since d+K=V=R+r.
+So v=($US/(2d)$, - $V/K$ * $y_0$). Exact.
+
+So everything explicit.
+
+So far good.
+
+--------------------------------------------------------------------------
+
+### 3. Intersections of line AP with $\Omega$, $\Gamma$: points E,F.
+
+Need second intersection besides A of line through A with circles centers M origin radius r, and N radius R.
+
+General fact for line through A with direction v, for circle centered at Z passing through A:
+Param line: A + s v. f(s)=|A - Z + s v|^2 - radius^2. At s=0 zero. Expand: 2 s (A-Z)·v + s^2 $|v|^2$=0. So other root:
+s = -2 (A - Z)·v / $|v|^2$. Good.
+
+So $s_E$ (Z=M origin): $s_E$ = -2 $A \cdot v$ / $|v|^2$.
+$s_F$ (Z=N (d,0)): $s_F$ = -2 $(A-N) \cdot v$ / $|v|^2$.
+
+So need $|v|^2$, $A \cdot v$, $(A-N) \cdot v$.
+
+Compute $|v|^2$ first.
+v_x= $US/(2d)$, v_y= - $V/Ky_0$.
+$|v|^2$= $U^2S^2$/(4 $d^2$) + $V^2$/$K^2y_0$^2.
+
+Now use $y_0$^2 from (**): $y_0$^2= S K ($d^2$ - $U^2$)/ (4 $d^2$). Denote D:= $d^2$ - $U^2$.
+So $|v|^2$= S/(4 $d^2$)[ S $U^2$ + $V^2$ D / K ].
+
+Simplify bracket: S $U^2$ + $V^2$ D/K.
+Write $V^2$ D /K = $V^2d^2$/K - $V^2U^2$/K.
+So = $U^2$ (S - $V^2$/K) + $V^2d^2$/ K.
+Now S - $V^2$/K:
+S=d+V, K= V - d. (common denom K): (d+V)(V - d) - $V^2$ = $V^2$ - $d^2$ - $V^2$= - $d^2$. /K. So S - $V^2$/K = - $d^2$/K.
+So bracket = - $d^2U^2$/K + $V^2d^2$/K = $d^2$ ($V^2$ - $U^2$)/K. $V^2$ - $U^2$=4 $Rr$. So bracket= $d^2$*4 $Rr$ /K.
+Now S/(4 $d^2$)*$d^2$*4 $Rr$ /K= S $Rr$ /K.
+So $|v|^2$ = S $Rr$ / K. Very clean. (S = d+V, K=V - d.)
+
+So denom for $s_E$, $s_F$: S $Rr$ /K.
+
+Now $A \cdot v$:
+A=($x_0$, $y_0$). v_x=$US/(2d)$, v_y=- $V/Ky_0$.
+Dot: $A \cdot v$= $x_0$*$US/(2d)$ - $V/Ky_0$^2.
+Plug $y_0$^2= S K D/(4 $d^2$):
+$A \cdot v$= S/(4 $d^2$)[ 2 d U $x_0$ - V D ].
+Now 2 d $x_0$ = $d^2$ + $r^2$ - $R^2$. Express via U,V: $r^2$ - $R^2$ = - U V, so 2 d $x_0$ = $d^2$ - U V.
+So 2 d U $x_0$ - V D = U($d^2$ - U V) - V D
+= U $d^2$ - $U^2$ V - V $d^2$ + V $U^2$ = (U - V) $d^2$ = -2 r $d^2$. Great cancellation.
+So $A \cdot v$= S/(4 $d^2$)*(-2 r $d^2$)= - S r /2. Nice.
+
+Now $(A-N) \cdot v$:
+A - N=($x_0$ - d, $y_0$). Dot:
+($x_0$ - d)* $US/(2d)$ - $V/Ky_0$^2.
+Same style:
+$(A-N) \cdot v$ = S/(4 $d^2$)[2 d U ($x_0$ - d) - V D].
+Compute 2 d ($x_0$ - d) = 2 d $x_0$ - 2 $d^2$ = ($d^2$ - U V) -2 $d^2$= - $d^2$ - U V.
+So numerator: U(- $d^2$ - U V) - V D= -U $d^2$ - $U^2$ V - V $d^2$ + V $U^2$= - (U+V)$d^2$= - 2 R $d^2$. So dot= S/(4 $d^2$)*(-2 R $d^2$) = - S R /2.
+
+So: $A \cdot v$= - S r /2, $(A-N) \cdot v$= - S R /2, $|v|^2$= S $Rr$ /K.
+
+So parameters:
+$s_E$ = -2 $A \cdot v$ / $|v|^2$ = -2 (- S r/2)/ (S $Rr$ /K) = $K/R$.
+$s_F$ = -2 $(A-N) \cdot v$ / $|v|^2$= $K/r$.
+
+So exact:
+E = A + (K/R) v,  F= A + (K/r) v. Great.
+
+Now explicit coordinates of E,F (will need soon):
+Compute E:
+$E_x$= $x_0$ + (K/R) v_x = $x_0$ + (K/R)* $US/(2d)$ = $x_0$ + U (K S)/(2 d R). But K S=(V-d)(V+d)=$V^2$ - $d^2$.
+So $E_x$= $x_0$ + U ($V^2$ - $d^2$)/ (2 d R).
+Crucial identity now: V $x_0$ - r d = - U ($V^2$ - $d^2$)/ (2 d). Verify:
+$x_0$= ($d^2$ + $r^2$ - $R^2$)/2d= ($d^2$ - U V)/2d.
+V $x_0$ - r d= V($d^2$ - U V)/2 d - r d= (V $d^2$ - U $V^2$ - 2 r $d^2$)/2d.
+V -2 r= (R+r) -2 r= R - r= U. So numerator= U $d^2$ - U $V^2$= -U ($V^2$ - $d^2$). /2d. Exactly. So identity:
+V $x_0$ - r d = - U ($V^2$ - $d^2$)/ (2 d). Good.
+
+So U($V^2$ - $d^2$)/(2 d) = - (V $x_0$ - r d). Plug: $E_x$= $x_0$ - (V $x_0$ - r d)/R = (r/R)(d - $x_0$). Nice.
+$E_y$= $y_0$ + (K/R) v_y= $y_0$ + (K/R)( - $V/Ky_0$)= $y_0$ - V/R $y_0$= - (r/R) $y_0$.
+
+So E = ( (r/R)(d - $x_0$), - (r/R) $y_0$).
+
+Same for F:
+$F_x$= $x_0$ + (K/r) v_x= $x_0$ + U ($V^2$ - $d^2$)/(2 d r) = $x_0$ - (V $x_0$ - r d)/ r = d - (V/r) $x_0$= d - (R/r) $x_0$.
+$F_y$= $y_0$ + (K/r) v_y= $y_0$ - V/r $y_0$= - (R/r) $y_0$.
+
+So final coords:
+B=($x_0$, -$y_0$), E=( (r/R)(d - $x_0$), - (r/R) $y_0$), F=( d - (R/r) $x_0$, - (R/r) $y_0$). All good.
+
+So step 3 done.
+
+--------------------------------------------------------------------------
+
+### 4. Equation of circumcircle of B,E,F.
+
+Need explicit circle equation.
+
+Let $\omega$= circumcircle through B,E,F. Standard circle form: x^2 + y^2 + a x + b y + c=0 (unknown a,b,c).
+
+We'll solve a,b,c using B,E,F coordinates above. Great simplifications.
+
+First, B and E both on $\Omega$ radius r around origin: |B|^2= $x_0$^2 + $y_0$^2= $r^2$.
+Check |E|^2: $E_x$=(r/R)(d - $x_0$), $E_y$=- (r/R) $y_0$.
+So |E|^2 = ($r^2$/$R^2$)[ (d - $x_0$)^2 + $y_0$^2 ].
+But A on $\Gamma$: (d - $x_0$)^2 + $y_0$^2= $R^2$. So |E|^2= $r^2$. So |B|^2=|E|^2 = $r^2$. Good.
+
+Plug B into $\omega$: $r^2$ + a $x_0$ - b $y_0$ + c=0.    (EqB)
+Plug E into $\omega$: $r^2$ + a $E_x$ + b $E_y$ + c=0.    (EqE)
+
+Subtract: a($x_0$ - $E_x$) - b ($y_0$ + $E_y$) =0.
+
+Now $x_0$ - $E_x$: $E_x$= (r/R)(d - $x_0$). So $x_0$ - $E_x$= ( (R+r) $x_0$ - r d)/R= (V $x_0$ - r d)/R.
+$y_0$ + $E_y$= $y_0$ - (r/R) $y_0$= (R - r)/R $y_0$= U/R $y_0$.
+So relation from B,E:
+a (V $x_0$ - r d) - b U $y_0$=0.    (Rel I)    (V=R+r, U=R-r.)
+
+So far.
+
+Now bring F into $\omega$.
+First c from B: c= - $r^2$ - a $x_0$ + b $y_0$.
+
+Plug F:
+Condition: $F_x$^2 + $F_y$^2 + a $F_x$ + b $F_y$ + c=0.
+Replace c: 0= a($F_x$ - $x_0$) + b($F_y$ + $y_0$) + ($F_x$^2 + $F_y$^2 - $r^2$).    (*)
+
+Now F=( d - (R/r) $x_0$, - (R/r) $y_0$). So:
+$F_x$ - $x_0$= d - (R/r) $x_0$ - $x_0$= d - (V/r) $x_0$ = - (V $x_0$ - r d)/ r.
+$F_y$ + $y_0$= - (R/r) $y_0$ + $y_0$= - U/r $y_0$.
+
+So * becomes:
+- a (V $x_0$ - r d)/r - b U $y_0$ / r + ($F_x$^2 + $F_y$^2 - $r^2$)/?=0, multiply r:
+- a (V $x_0$ - r d) - b U $y_0$ + r( $F_x$^2 + $F_y$^2 - $r^2$)? Actually third term no division by r.
+Let's compute third term $S_F$:=$F_x$^2 + $F_y$^2 - $r^2$ explicitly.
+
+$F_x$^2 + $F_y$^2:
+$F_x$= d - (R/r)$x_0$, $F_y$= - (R/r) $y_0$.
+Compute:
+$F_x$^2 + $F_y$^2= $d^2$ - 2 d (R/r) $x_0$ + (R/r)^2 ($x_0$^2 + $y_0$^2)
+= $d^2$ - 2 d (R/r) $x_0$ + $R^2$. Subtract $r^2$:
+$S_F$= $d^2$ - 2 d (R/r) $x_0$ + $R^2$ - $r^2$.
+
+Need express it simply:
+Use 2 d $x_0$= $d^2$ + $r^2$ - $R^2$.
+So:
+$S_F$= $d^2$ - (R/r)($d^2$ + $r^2$ - $R^2$) + ($R^2$ - $r^2$)
+Compute over r:
+numer= r $d^2$ - R $d^2$ + R U? Let's do clean:
+$d^2$ term: r $d^2$ - R $d^2$= - U $d^2$.
+Constant term: inside numerator also: r*($R^2$ - $r^2$)? Actually:
+numer= r $d^2$ - R($d^2$ + $r^2$ - $R^2$) + r ($R^2$ - $r^2$)
+= r $d^2$ - R $d^2$ - R $r^2$ + R^3 + r $R^2$ - r^3
+Group r $d^2$ - R $d^2$= - U $d^2$.
+Remaining: (-R $r^2$ + r $R^2$) = $Rr$ (R - r) = $Rr$ U.
+R^3 - r^3? combine with previous? Better: R^3 - r^3 also express as (R - r)($R^2$ + $Rr$ + $r^2$)= U(...), but together with $Rr$ U? Actually compute:
+numer= - U $d^2$ + R^3 + r $R^2$ - R $r^2$ - r^3
+Simplify remaining cubic part:
+R^3 + r $R^2$ - R $r^2$ - r^3 = (R - r)($R^2$ +?):
+Factor U=R - r:
+R^3 - r^3 = U ($R^2$ + $Rr$ + $r^2$). Add r $R^2$ - R $r^2$= $Rr$ (R - r)= $Rr$ U.
+So cubic part = U ($R^2$ + $Rr$ + $r^2$) + U $Rr$ = U ($R^2$ + 2 $Rr$ + $r^2$)= U (R + r)^2= U $V^2$.
+So numerator total: - U $d^2$ + U $V^2$= U ($V^2$ - $d^2$). Divide by r. So
+$S_F$= U ($V^2$ - $d^2$)/ r. Exactly. Good.
+
+So (*) with r multiply:
+- a (V $x_0$ - r d) - b U $y_0$ + U ($V^2$ - $d^2$) =0.    (Rel II)
+
+Perfect.
+
+Now compare Rel II with Rel I:
+Rel I: a (V $x_0$ - r d) - b U $y_0$=0  =>  b U $y_0$ = a (V $x_0$ - r d).
+Plug into II:
+- a (V $x_0$ - r d) - a (V $x_0$ - r d) + U ($V^2$ - $d^2$)=0
+=> -2 a (V $x_0$ - r d) + U ($V^2$ - $d^2$)=0.
+So 2 a (V $x_0$ - r d) = U ($V^2$ - $d^2$). Good.
+
+Now need V $x_0$ - r d explicit.
+Identity (easy): V $x_0$ - r d = - U ($V^2$ - $d^2$) / (2 d). Let's show:
+$x_0$=($d^2$ + $r^2$ - $R^2$)/(2 d)= ($d^2$ - U V)/ (2d). Multiply V, subtract r d:
+V $x_0$ - r d= V ($d^2$ - U V)/ (2 d) - r d= (V $d^2$ - U $V^2$ - 2 r $d^2$)/ (2d).
+V - 2 r= (R+r -2 r)= R - r=U. So numerator= U $d^2$ - U $V^2$= - U ($V^2$ - $d^2$). /2d. Exactly. So identity:
+V $x_0$ - r d= - U ($V^2$ - $d^2$)/ (2 d). Nonzero ($U>0$, $V^2$ > $d^2$ since d<R+r). Good.
+
+Plug into 2 a (V $x_0$ - r d) = U ($V^2$ - $d^2$):
+Left = 2 a * [ - U ($V^2$ - $d^2$)/(2 d)] = - a U ($V^2$ - $d^2$)/ d.
+So equation: - a U ($V^2$ - $d^2$)/ d = U ($V^2$ - $d^2$). Cancel nonzero U($V^2$ - $d^2$): -a/d =1 -> a=-d. Great.
+
+So a=-d.
+
+Now b from Rel I:
+a (V $x_0$ - r d) - b U $y_0$=0 -> (-d) (V $x_0$ - r d) - b U $y_0$=0 -> b U $y_0$= - d (V $x_0$ - r d).
+Replace V $x_0$ - r d = - U ($V^2$ - $d^2$)/ (2 d): RHS= U ($V^2$ - $d^2$)/2.
+So b U $y_0$= U ($V^2$ - $d^2$)/2 -> cancel U nonzero:
+b $y_0$= ($V^2$ - $d^2$)/2. So b= ($V^2$ - $d^2$) / (2 $y_0$). Great.
+
+c from B:
+EqB: $r^2$ + a $x_0$ - b $y_0$ + c=0 -> c= - $r^2$ - a $x_0$ + b $y_0$
+= - $r^2$ + d $x_0$ + ($V^2$ - $d^2$)/2. (since a=-d, b $y_0$=($V^2$ - $d^2$)/2).
+Now d $x_0$ from 2 d $x_0$= $d^2$ + $r^2$ - $R^2$ -> d $x_0$= ($d^2$ + $r^2$ - $R^2$)/2.
+So c= - $r^2$ + ($d^2$ + $r^2$ - $R^2$)/2 + ($V^2$ - $d^2$)/2
+= [ -2 $r^2$ + $d^2$ + $r^2$ - $R^2$ + $V^2$ - $d^2$]/2
+= [ - $r^2$ - $R^2$ + $V^2$]/2. $V^2$=(R+r)^2=$R^2$ +2 $Rr$ + $r^2$. Numerator=2 $Rr$. So c= $Rr$. Great.
+
+So circumcircle of B,E,F (call it $\omega$) has explicit Cartesian equation:
+(***)  x^2 + y^2 - d x + b y + $Rr$= 0,
+with b:= ($V^2$ - $d^2$)/(2 $y_0$). (V=R+r). Exactly.
+
+So center of $\omega$: (d/2, -b/2), etc. Good.
+
+So far, $\omega$ determined nicely.
+
+So task: line through H parallel AP is tangent to $\omega$.
+
+Now compute H and direction, plug into $\omega$.
+
+Orthocenter H of triangle P M N.
+M=(0,0), N=(d,0), P=(t, $p_y$), with $p_y$= - $d/Ky_0$, t=(d+U)/2.
+
+Triangle PMN: base MN is x-axis. Altitude from P to MN is perpendicular to MN (x-axis): vertical through P, x= t. So orthocenter H is intersection of that altitude with altitude from M to PN. Only need H coordinates: easiest: altitude through P to MN is x=t, so $H_x$=t. For $H_y$: intersection with altitude from M (0,0) to PN. Slope of PN: from P(t,$p_y$) to N(d,0): slope = (0 - $p_y$)/(d - t) = - $p_y$/(d - t). Perp slope for altitude from M: (d - t)/$p_y$. Line through origin with that slope: y= (d - t)/$p_y$ x. At x=t gives y_H= t (d - t)/ $p_y$. Exactly.
+Compute d - t:
+t=(d+U)/2, so d - t= (d - U)/2= (d - (R - r))/2. Keep symbolic. Better express in V,K etc:
+We want express $H_y$ in simple ratio of $y_0$: it will be - $d/S$ * $y_0$ found earlier.
+Let's compute $H_y$:
+$H_x$=t.
+$H_y$= t (d - t)/ $p_y$.
+Now t=(d+U)/2, d - t= (d - U)/2. Product= ($d^2$ - $U^2$)/4.
+Divide by $p_y$= - $d/Ky_0$:
+$H_y$= ($d^2$ - $U^2$)/4 * ( - K ) / (d $y_0$) = - K ($d^2$ - $U^2$)/ (4 d $y_0$).
+Now use $y_0$^2 formula 4 $d^2y_0$^2= S K ($d^2$ - $U^2$). So √? Let's do ratio:
+$H_y$ / $y_0$= - K ($d^2$ - $U^2$)/ (4 d $y_0$^2). Plug $y_0$^2:
+= - K ($d^2$ - $U^2$)/ (4 d) / [ S K ($d^2$ - $U^2$)/ (4 $d^2$)] = - d / S.
+So $H_y$= - ($d/S$) $y_0$. Great, linear in $y_0$. Nice.
+
+So H = (t, -$d/Sy_0$). Good.
+
+So line $\ell_H$ we need: through H, direction parallel AP = direction v from before: v=($\alpha_x$, $\alpha_y$) with $\alpha_x$= $US/(2d)$, $\alpha_y$= - $V/Ky_0$. Exactly same v as AP. Good.
+
+So param of $\ell_H$:
+X(s) = t + $\alpha_x$ s, Y(s) = $H_y$ + $\alpha_y$ s = - $d/Sy_0$ + $\alpha_y$ s.
+
+So far.
+
+Now: tangency to $\omega$. $\omega$ has equation (***) above:
+F(x,y):= x^2 + y^2 - d x + b y + $Rr$, where b= ($V^2$ - $d^2$)/ (2 $y_0$), S,K,U,V defined.
+
+Need check line $\ell_H$ intersection with $\omega$ has single point.
+
+So substitute param (X(s),Y(s)) into F. That's quadratic in s.
+Show discriminant 0.
+
+Let's do. Compute coefficients cleanly, use identities same as earlier.
+
+I'll denote:
+$\alpha_x$= $US/(2d)$, $\alpha_y$= - $V/Ky_0$.
+t= (d+U)/2, $H_y$= - $d/Sy_0$.
+
+Also D:= $d^2$ - $U^2$ for brevity.
+Recall $y_0$^2= S K D / (4 $d^2$). Fundamental.
+Also $V^2$ - $U^2$=4 $Rr$.
+
+Now expand F(X(s),Y(s)).
+Standard:
+A2= $\alpha_x$^2 + $\alpha_y$^2.
+A1= (2 t - d) $\alpha_x$ + 2 $H_y\alpha_y$ + b $\alpha_y$.
+A0= t^2 - d t + $H_y$^2 + b $H_y$ + $Rr$.
+
+That's exact from expansion: (t + $\alpha_x$ s)^2 + ($H_y$ + $\alpha_y$ s)^2 - d(t+$\alpha_x$ s) + b($H_y$ + $\alpha_y$ s) + $Rr$.
+
+Need A2,A1,A0.
+
+We've computed them once; reproduce with clean simplification:
+
+Compute A2.
+$\alpha_x$^2= $U^2S^2$/(4 $d^2$).
+$\alpha_y$^2= $V^2$/$K^2y_0$^2= $V^2$/$K^2$ * S K D/(4 $d^2$) = S $V^2$ D/(4 $d^2$ K).
+So A2= S/(4 $d^2$)[ S $U^2$ + $V^2$ D /K ].
+Simplify inside:
+Call X= S $U^2$ + $V^2$ D /K.
+Write $V^2$ D/K = $V^2d^2$/K - $V^2U^2$/K.
+X= $U^2$(S - $V^2$/K) + $V^2d^2$/K.
+Now S - $V^2$/K: S=d+V, K=V - d: (d+V) - $V^2$/(V - d) = [(d+V)(V - d) - $V^2$]/K = ($V^2$ - $d^2$ - $V^2$)/K= - $d^2$/K.
+So $U^2$(S - $V^2$/K)= - $d^2U^2$/K. Add $V^2d^2$/K -> $d^2$($V^2$ - $U^2$)/K.
+So X= $d^2$ ($V^2$ - $U^2$)/K. So A2= S/(4 $d^2$)*$d^2$ ($V^2$ - $U^2$)/K= S ($V^2$ - $U^2$)/ (4K).
+$V^2$ - $U^2$=4 $Rr$. So A2= S $Rr$ /K. Nice.
+
+So A2 = S $Rr$ / K. Exactly $|v|^2$.
+
+Now A1.
+First part (2 t - d) $\alpha_x$: t=(d+U)/2 -> (2 t - d)=U. So = U $\alpha_x$= $U^2$ S/(2 d).
+Second 2 $H_y\alpha_y$: 2* (-$d/Sy_0$)* (-$V/Ky_0$)= 2 d V/(S K) $y_0$^2.
+Replace $y_0$^2= S K D/(4 $d^2$): gives V D/(2 d).
+Third b $\alpha_y$: b= ($V^2$ - $d^2$)/(2 $y_0$), $\alpha_y$= - $V/Ky_0$ -> product - V ($V^2$ - $d^2$)/(2K).
+But $V^2$ - $d^2$=K(V + d). So third = - V (V+d)/2= - ($V^2$ + V d)/2.
+So A1= $U^2$ S/(2 d) + V D/(2 d) - ($V^2$ + V d)/2.
+
+Combine first two: ($U^2$ S + V D)/(2 d). D= $d^2$ - $U^2$. Numerator:
+$U^2$ S + V $d^2$ - V $U^2$= $U^2$(S - V) + V $d^2$.
+S - V = d. So numerator= $U^2$ d + V $d^2$= d($U^2$ + V d). Divide by 2 d => ($U^2$ + V d)/2.
+Now subtract ($V^2$ + V d)/2: A1= ($U^2$ + V d - $V^2$ - V d)/2= ($U^2$ - $V^2$)/2= - ($V^2$ - $U^2$)/2.
+$V^2$ - $U^2$=4 $Rr$. So A1= -2 $Rr$. Clean.
+
+So A1= -2 $Rr$.
+
+Now A0.
+t^2 - d t: t=(d+U)/2 -> t^2- d t= (d+U)^2/4 - d(d+U)/2= (d+U)(d+U -2 d)/4= (d+U)(U - d)/4= - ($d^2$ - $U^2$)/4= - D/4.
+
+$H_y$^2: $H_y$= - $d/Sy_0$. Square: $d^2$/$S^2y_0$^2= $d^2$/$S^2$* S K D/(4 $d^2$)= K D/(4 S).
+
+b $H_y$: b=($V^2$ - $d^2$)/ (2 $y_0$), $H_y$=- $d/Sy_0$, product:
+- d ($V^2$ - $d^2$)/ (2 S). (since $y_0$ cancels).
+
+Add $Rr$= ($V^2$ - $U^2$)/4.
+
+So A0= - D/4 + ($V^2$ - $U^2$)/4 + K D/(4 S) - d ($V^2$ - $d^2$)/ (2 S).
+First two: -D/4 + ($V^2$ - $U^2$)/4= ($V^2$ - $d^2$)/4.
+
+So A0= ($V^2$ - $d^2$)/4 + K D/(4 S) - d ($V^2$ - $d^2$)/ (2 S)
+= [ ($V^2$ - $d^2$) S + K D - 2 d ($V^2$ - $d^2$) ]/(4 S).
+
+Numerator: ($V^2$ - $d^2$)(S - 2 d) + K D. S - 2 d = (d+V) -2 d= V - d=K. So first part=K ($V^2$ - $d^2$). Add K D: K( $V^2$ - $d^2$ + D)= K ($V^2$ - $U^2$). So numerator= K ($V^2$ - $U^2$)=K*4 $Rr$.
+So A0= 4 $Rr$ K/(4 S) = $Rr$ K / S. Great.
+
+So coefficients:
+A2= S $Rr$ /K, A1= -2 $Rr$, A0= $Rr$ K /S.
+
+So Q(s)=F(X(s),Y(s))=A2 s^2 +A1 s + A0
+= $Rr$[ (S/K) s^2 -2 s + K/S ].
+
+So discriminant of quadratic in s:
+$\Delta = $A1^2 - 4 A0 A2 = ( -2 $Rr$)^2 - 4 ($Rr$ K/S)(S $Rr$/K) = 4 $R^2r^2$ - 4 $R^2r^2$=0. Exactly zero.
+
+So along $\ell_H$, intersection with $\omega$: parameter s quadratic has discriminant zero -> single solution -> $\ell_H$ is tangent to $\omega$. Direction of $\ell_H$ is v, same as AP. Exactly statement.
+
+So line through H parallel AP is tangent to circumcircle of B,E,F. Exactly what was asked.
+
+So done.
+
+--------------------------------------------------------------------------
+
+All algebra consistent, all denominators nonzero: U=R-r>0 (given $r<R$). K=R+r - d>0 because two circles intersect (distance of centers less than sum radii). Good.
+
+So proof complete.
+
+\(\boxed{}\)

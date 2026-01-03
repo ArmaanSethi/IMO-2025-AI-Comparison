@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>P1 OpenAI Test</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        h2 {
+            color: #1a73e8;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Problem 1 - OpenAI</h2>
+    <div id="content" class="content">Loading...</div>
+    <script type="module">
+        import problems from './js/data.js';
+        const p = problems.find(x => x.id === 1);
+        document.getElementById('content').innerHTML = marked.parse(p.openai || 'No content');
+        renderMathInElement(document.getElementById('content'), { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }], throwOnError: false });
+    </script>
+</body>
+
+</html>
