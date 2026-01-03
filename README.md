@@ -1,4 +1,4 @@
-# IMO 2025 AI Solutions Comparison: OpenAI o3 vs Google DeepMind Gemini 2.0
+# IMO 2025 AI Solutions Comparison: OpenAI o3 vs Google DeepMind Gemini 2.5 Pro Deep Think
 
 **Live Project:** [**imo-2025-ai-comparison.vercel.app**](https://imo-2025-ai-comparison.vercel.app/)
 
@@ -11,7 +11,7 @@ The International Mathematical Olympiad (IMO) is the world's most prestigious ma
 This project centralizes these solutions to facilitate analysis, discussion, and educational use.
 
 **Key Features:**
-*   **Side-by-Side Comparison:** Direct view of OpenAI o3 and Google DeepMind Gemini 2.0 solutions.
+*   **Side-by-Side Comparison:** Direct view of OpenAI o3 and Google DeepMind Gemini 2.5 Pro Deep Think solutions.
 *   **Full Coverage:** Includes official solutions for Problems 1, 2, 3, 4, and 5.
 *   **Clean Rendering:** Custom LaTeX rendering using KaTeX for clear mathematical notation.
 *   **Source Fidelity:** Solutions are presented as close to the original model outputs as possible, ensuring authenticity.
