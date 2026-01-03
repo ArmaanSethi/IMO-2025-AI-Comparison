@@ -241,3 +241,33 @@ body {
 .katex {
     font-size: 1em !important;
 }
+/* FAQ Section */
+.faq-section {
+    margin-top: 3rem;
+}
+
+.faq-item {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.faq-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.faq-item h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-sans);
+}
+
+.faq-item p {
+    color: #475569;
+    font-size: 1rem;
+    line-height: 1.6;
+}

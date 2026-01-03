@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imo-2025-ai-comparison.vercel.app/sitemap.xml
