@@ -61,6 +61,7 @@ Solving 5 out of 6 problems officially, marking a historic milestone in AI mathe
 *   [DeepMind IMO 2025 Official Blog: Gemini Deep Think](https://deepmind.google/discover/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/)
 *   [DeepMind IMO 2024 Blog: AlphaProof](https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/)
 *   [OpenAI IMO 2025 Proofs (GitHub)](https://github.com/aw31/openai-imo-2025-proofs)
+*   [OpenAI IMO 2025 Announcement (X)](https://x.com/OpenAI/status/1946594928945148246)
 *   [DeepMind IMO 2025 Solutions (PDF)](https://storage.googleapis.com/deepmind-media/gemini/IMO_2025.pdf)
 
 ## Acknowledgments
